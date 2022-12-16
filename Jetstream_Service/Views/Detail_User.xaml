@@ -96,6 +96,7 @@
 
             <TextBox x:Name="tbBemer" 
                      Text="{Binding Kommentar}"
+                     IsReadOnly="True"
                              Width="665"
                              Height="50"
                              Margin="10,0,0,10"
@@ -204,7 +205,6 @@
         </StackPanel>
 
         <Button
-            Click="btClose"
             Grid.Row="1"
             Grid.Column="3"
             VerticalAlignment="Center"
@@ -213,9 +213,6 @@
             Width="90"
             ToolTip="Abbrechen"
             Style="{DynamicResource RoundButton}">
-            <Button.DataContext>
-                <vm:MainViewModel/>
-            </Button.DataContext>
 
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/schaltflache-abbrechen.png" Width="20" />

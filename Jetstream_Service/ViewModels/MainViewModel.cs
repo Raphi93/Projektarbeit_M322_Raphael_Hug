@@ -33,7 +33,7 @@ namespace JetStream_Service.ViewModels
         private RelayCommand _cmdDelete;
         private RelayCommand _cmdRefresh;
         private RelayCommand _cmdExit;
-        private RelayCommand _cmdExitDetail;
+
 
         public MainViewModel()
         {
@@ -44,7 +44,7 @@ namespace JetStream_Service.ViewModels
             _cmdRefresh = new RelayCommand(param => Execute_Refresh(), param => CanExecute_Refresh());
             _cmdLogin = new RelayCommand(param => Execute_Login(), param => CanExecute_Login());
             _cmdExit = new RelayCommand(param => Execute_Exit(), param => CanExecute_Exit());
-            _cmdExitDetail = new RelayCommand(param => Execute_ExitDetail(), param => CanExecute_ExitDetail());
+
 
             jwtKey = Properties.Settings.Default.JWTToken;
             string baseURL = Properties.Settings.Default.APILink;
@@ -104,6 +104,7 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Update()
         {
+
             Edit_User edit_User = new Edit_User();
             edit_User.Show();
         }
@@ -117,7 +118,8 @@ namespace JetStream_Service.ViewModels
         {
             RegistrationModel regi = new RegistrationModel();
             regi = SelectedRegistartion;
-            Detail_User detail_User = new Detail_User(regi);
+            DetailViewModel editViewModel = new DetailViewModel(regi);
+            Detail_User detail_User = new Detail_User();
             detail_User.Show();
         }
 
@@ -228,22 +230,6 @@ namespace JetStream_Service.ViewModels
         {
             get { return _cmdExit; }
             set { _cmdExit = value; }
-        }
-
-        public RelayCommand CmdExitEdit
-        {
-            get { return _cmdExitDetail; }
-            set { _cmdExitDetail = value; }
-        }
-
-        private void Execute_ExitDetail()
-        {
-            CloseAction();
-        }
-
-        private bool CanExecute_ExitDetail()
-        {
-            return true;
         }
 
     }

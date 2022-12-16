@@ -106,8 +106,8 @@ namespace JetStream_Service.ViewModels
             }
             MainViewModel mainView = new MainViewModel();
             CloseAction();
-            mainView.CmdRefresh.CanExecute(mainView);
-            mainView.CmdRefresh.Execute(mainView);
+            //mainView.CmdRefresh.CanExecute(mainView);
+            //mainView.CmdRefresh.Execute(mainView);
         }
 
         private bool CanExecute_Senden()

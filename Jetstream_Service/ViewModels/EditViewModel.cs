@@ -41,8 +41,6 @@ namespace JetStream_Service.ViewModels
         private void Execute_Exit()
         {
             CloseAction();
-
-
         }
 
         private bool CanExecute_Exit()

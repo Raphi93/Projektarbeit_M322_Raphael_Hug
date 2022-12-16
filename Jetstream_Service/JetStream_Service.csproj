@@ -82,9 +82,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Views\Detail_User.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Edit_User.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -113,11 +110,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\Detail_User.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Update="Views\Edit_User.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

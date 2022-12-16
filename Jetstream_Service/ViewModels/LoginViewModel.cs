@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace JetStream_Service.ViewModels
 {
-    internal class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
 
         public string jwtKey { get; set; }

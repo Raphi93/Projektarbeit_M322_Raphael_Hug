@@ -3,7 +3,7 @@ using System;
 
 namespace JetStream_Service.ViewModels
 {
-    internal class EditViewModel : ViewModelBase
+    public class EditViewModel : ViewModelBase
     {
         public Action CloseAction { get; set; }
         private RelayCommand _cmdSendenEdit;

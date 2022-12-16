@@ -6,7 +6,7 @@ namespace JetStream_Service.Models
 {
     public class RegistrationModel : ViewModelBase
     {
-        private int? _Id;
+        private int _Id;
         [JsonPropertyName("id")]
         public int Id
         {

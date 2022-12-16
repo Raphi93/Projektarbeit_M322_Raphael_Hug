@@ -3,7 +3,7 @@ using System;
 
 namespace JetStream_Service.ViewModels
 {
-    internal class NewViewModel : ViewModelBase
+    public class NewViewModel : ViewModelBase
     {
 
         public Action CloseAction { get; set; }

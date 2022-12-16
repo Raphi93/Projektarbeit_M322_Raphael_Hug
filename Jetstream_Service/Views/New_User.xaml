@@ -22,10 +22,6 @@
         </Style>
     </Window.Resources>
 
-    <Window.DataContext>
-        <ViewModels:NewViewModel/>
-    </Window.DataContext>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

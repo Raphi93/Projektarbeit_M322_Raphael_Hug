@@ -1,25 +1,27 @@
 ﻿using JetStream_Service.Models;
 using JetStream_Service.Utility;
 using JetStream_Service.View;
+using JetStream_Service.Views;
 using RestSharp;
 using System;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace JetStream_Service.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
+        private ObservableCollection<RegistrationModel> _registration = new ObservableCollection<RegistrationModel>();
         private RegistrationModel _selectedRegistartion = new RegistrationModel();
         private Content _content = new Content();
         private bool _IsIndeterminate = new bool();
 
+
         public string jwtKey { get; set; }
         public string registrationURL { get; set; }
 
-        private ObservableCollection<RegistrationModel> _registration = new ObservableCollection<RegistrationModel>();
 
         //private RegistrationModel _selectRegistration = new RegistrationModel();
 
@@ -74,6 +76,8 @@ namespace JetStream_Service.ViewModels
             }
         }
 
+        
+
         public Content content
         {
             get { return _content; }
@@ -111,7 +115,9 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Detail()
         {
-            Detail_User detail_User = new Detail_User();
+            RegistrationModel regi = new RegistrationModel();
+            regi = SelectedRegistartion;
+            Detail_User detail_User = new Detail_User(regi);
             detail_User.Show();
         }
 

@@ -1,0 +1,139 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="add-user.png" />
+    <None Remove="anruf.png" />
+    <None Remove="ausweis.png" />
+    <None Remove="bemerkungen.png" />
+    <None Remove="bevorstehende.png" />
+    <None Remove="datum.png" />
+    <None Remove="edit.png" />
+    <None Remove="email.png" />
+    <None Remove="gesichts-id.png" />
+    <None Remove="information.png" />
+    <None Remove="login.png" />
+    <None Remove="logo.png" />
+    <None Remove="mail-senden.png" />
+    <None Remove="management-service.png" />
+    <None Remove="prioritat.png" />
+    <None Remove="process.png" />
+    <None Remove="refresh-user-sign.png" />
+    <None Remove="schaltflache-abbrechen.png" />
+    <None Remove="shutdown.png" />
+    <None Remove="social-media.png" />
+    <None Remove="Views\anruf.png" />
+    <None Remove="Views\ausweis.png" />
+    <None Remove="Views\bemerkungen.png" />
+    <None Remove="Views\bevorstehende.png" />
+    <None Remove="Views\datum.png" />
+    <None Remove="Views\email.png" />
+    <None Remove="Views\gesichts-id.png" />
+    <None Remove="Views\mail-senden.png" />
+    <None Remove="Views\management-service.png" />
+    <None Remove="Views\prioritat.png" />
+    <None Remove="Views\process.png" />
+    <None Remove="Views\schaltflache-abbrechen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="MainWindow-PCSchuel.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="RestSharp" Version="108.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="add-user.png" />
+    <Resource Include="edit.png" />
+    <Resource Include="information.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="login.png" />
+    <Resource Include="logo.png" />
+    <Resource Include="refresh-user-sign.png" />
+    <Resource Include="shutdown.png" />
+    <Resource Include="social-media.png" />
+    <Resource Include="Views\anruf.png" />
+    <Resource Include="Views\ausweis.png" />
+    <Resource Include="Views\bemerkungen.png" />
+    <Resource Include="Views\bevorstehende.png" />
+    <Resource Include="Views\datum.png" />
+    <Resource Include="Views\email.png" />
+    <Resource Include="Views\gesichts-id.png" />
+    <Resource Include="Views\mail-senden.png" />
+    <Resource Include="Views\management-service.png" />
+    <Resource Include="Views\prioritat.png" />
+    <Resource Include="Views\process.png" />
+    <Resource Include="Views\schaltflache-abbrechen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Detail_User.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Edit_User.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Login_User.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\New_User.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Pic\add-user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Pic\login.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Pic\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Detail_User.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Edit_User.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Login_User.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\New_User.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,78 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JetStream_Service"
+        xmlns:ViewModels="clr-namespace:JetStream_Service.ViewModels" x:Class="JetStream_Service.View.Login_User"
+        ResizeMode="NoResize"
+        Icon="/login.png"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Login" Height="170" Width="315">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="RoundButton">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <ViewModels:LoginViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="lbUserName"
+                       Content="Username"
+                       Margin="10,10,0,0"/>
+                <TextBox x:Name="tbUsername"
+                         Margin="10,10,0,0"
+                         Text="{Binding authentification.User, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"
+                         Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="lbPassw"
+                       Content="Password"
+                       Margin="10,10,0,0"/>
+                <TextBox x:Name="tbPassw"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding authentification.Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Margin="14,10,0,0"
+                         Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,20,15,0"
+                        HorizontalAlignment="Right">
+                <Button Command="{Binding CmdSendenLogin}"
+                    Width="90"
+                    ToolTip="Login"
+                    Style="{DynamicResource RoundButton}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/login.png" Width="20" />
+                        <TextBlock x:Name="tblLogin"
+                       Text="Login"
+                       Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding CmdExitLogin}"
+                    Width="90"
+                    Margin="10,0,0,0"
+                    ToolTip="Login"
+                    Style="{DynamicResource RoundButton}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Views/schaltflache-abbrechen.png" Width="20" />
+                        <TextBlock x:Name="tblAbbrechen"
+                       Text="Abbrechen"
+                       Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

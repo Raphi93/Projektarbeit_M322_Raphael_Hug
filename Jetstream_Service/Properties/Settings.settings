@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JetStream_Service.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="JWTToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJSYXBoaSIsIm5iZiI6MTY3MTExNTEwOSwiZXhwIjoxNjcxMTE2MDA5LCJpYXQiOjE2NzExMTUxMDl9.PVl460QBjqW35WIpgrFhgMeQAKn-DYo8lj1psLdj49kWauvEWvJRVwxD-jJlxqJFDB7ULA6Y7S0sGP0XjokYKQ</Value>
+    </Setting>
+    <Setting Name="APILink" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://localhost:7293</Value>
+    </Setting>
+    <Setting Name="registrationLink" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/Registration</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

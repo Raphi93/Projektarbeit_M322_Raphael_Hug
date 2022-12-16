@@ -21,13 +21,16 @@ namespace JetStream_Service.Views
     /// </summary>
     public partial class Detail_User : Window
     {
-        public Detail_User()
+        private RegistrationModel _regi = new RegistrationModel();
+        public Detail_User(RegistrationModel regi)
         {
             InitializeComponent();
-            MainViewModel ovm = new MainViewModel();
-            this.DataContext = ovm;
-            if (ovm.CloseAction == null)
-                ovm.CloseAction = new Action(() => this.Close());
+            _regi = regi;
+            DataContext = _regi;
+        }
+        private void btClose(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -9,7 +9,7 @@
         Icon="/edit.png"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Edit User" Height="300" Width="600"
+        Title="Edit User" Height="300" Width="700"
         Background="LightGray">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="RoundButton">
@@ -20,10 +20,6 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-
-    <Window.DataContext>
-        <ViewModels:EditViewModel/>
-    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -100,7 +96,8 @@
             </StackPanel>
 
             <TextBox x:Name="tbBemer"
-                             Width="565"
+                     Text="{Binding Path=Kommentar , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Width="665"
                              Height="50"
                              Margin="10,0,0,10"
                              HorizontalAlignment="Left"
@@ -155,20 +152,26 @@
                     Grid.Column="1" Grid.RowSpan="2">
 
             <TextBox x:Name="tbID"
+                     Text="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,14,10,0"
                         IsReadOnly="True"/>
 
             <TextBox x:Name="tbNamen"
+                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
             <TextBox x:Name="tbMail"
+                     Text="{Binding Path=EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
             <TextBox x:Name="tbPhone"
+                     Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
-            <DatePicker x:Name="dpErst"
-                                Margin="10,6,10,0"/>
+            <TextBox x:Name="dpErst"
+                     IsReadOnly="True"
+                        Text="{Binding Path=CreateDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="10,9,10,0"/>
 
         </StackPanel>
 
@@ -177,8 +180,9 @@
                     Grid.Column="3" Grid.RowSpan="2">
 
             <ComboBox x:Name="cbServ"
+                      Text="{Binding Path=Service, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,38,10,0">
-                <ComboBoxItem IsSelected="True" Content="Kleiner-Service"/>
+                <ComboBoxItem Content="Kleiner-Service"/>
                 <ComboBoxItem Content="Grosser-Service"/>
                 <ComboBoxItem Content="Rennski-Service"/>
                 <ComboBoxItem Content="Bindugen montieren und Einstellen"/>
@@ -187,24 +191,27 @@
             </ComboBox>
 
             <ComboBox x:Name="cbPrio"
+                      Text="{Binding Path=Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,5,10,0">
-                <ComboBoxItem IsSelected="True" Content="Express"/>
+                <ComboBoxItem Content="Express"/>
                 <ComboBoxItem Content="Standard"/>
                 <ComboBoxItem Content="Tief"/>
             </ComboBox>
 
             <ComboBox x:Name="cbStatus"
+                      Text="{Binding Path=Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,5,10,0">
-                <ComboBoxItem IsSelected="True" Content="Offen"/>
+                <ComboBoxItem Content="Offen"/>
                 <ComboBoxItem Content="In Arbeit"/>
                 <ComboBoxItem Content="Fertig"/>
             </ComboBox>
 
             <DatePicker x:Name="dpFinisch"
+                        Text="{Binding Path=PickupDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="10,5,10,0"/>
         </StackPanel>
 
-        <Button Command="{Binding CmdExitEdit}"
+        <Button Click="btClose"
             Grid.Row="1"
             Grid.Column="3"
             VerticalAlignment="Center"
@@ -222,7 +229,8 @@
             </StackPanel>
         </Button>
 
-        <Button Command="{Binding CmdSendenEdit}"
+        <Button Click="btSenden"
+                IsDefault="True"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Grid.Column="2"

@@ -5,7 +5,7 @@ namespace JetStream_Service.Models
     public class Content : ViewModelBase
     {
         private string _status;
-        public string status
+        public string Status
         {
             get { return _status; }
             set

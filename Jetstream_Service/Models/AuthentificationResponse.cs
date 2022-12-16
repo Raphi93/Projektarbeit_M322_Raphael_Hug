@@ -6,19 +6,6 @@ namespace JetStream_Service.Models
 
     public class AuthentificationResponse : ViewModelBase
     {
-        private string _user;
-        [JsonPropertyName("userName")]
-        public string user
-        {
-            get { return _user; }
-            set
-            {
-                if (_user != value)
-                {
-                    SetProperty(ref _user, value);
-                }
-            }
-        }
         private string _jwt;
         [JsonPropertyName("token")]
         public string jwt

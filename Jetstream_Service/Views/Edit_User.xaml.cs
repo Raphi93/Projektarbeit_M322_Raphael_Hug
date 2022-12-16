@@ -12,15 +12,22 @@ namespace JetStream_Service.View
     {
         private RegistrationModel _regi = new RegistrationModel();
 
-        public Edit_User()
+        public Edit_User(RegistrationModel regi)
         {
             InitializeComponent();
-
+            _regi = regi;
             DataContext = _regi;
         }
 
         private void btClose(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
+            Close();
+        }
+
+        private void btSenden(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
             Close();
         }
     }

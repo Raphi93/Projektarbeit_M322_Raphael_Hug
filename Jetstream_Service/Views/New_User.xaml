@@ -10,7 +10,7 @@
         Icon="/add-user.png"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="New User" Height="280" Width="600"
+        Title="New User" Height="240" Width="600"
         Background="LightGray">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="RoundButton">
@@ -21,6 +21,9 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
+    <Window.DataContext>
+        <ViewModels:NewViewModel/>
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -67,15 +70,7 @@
                        Margin="5,1,0,0"
                        Width="20"/>
             </StackPanel>
-            <StackPanel
-                    Orientation="Horizontal">
-                <Label x:Name="lbErstellt"
-                           Content="Erstellt:"
-                           Margin="10,1,0,0"/>
-                <Image Source="/Views/datum.png" 
-                       Margin="3,1,0,0"
-                       Width="20"/>
-            </StackPanel>
+   
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbBemerkung"
@@ -87,6 +82,7 @@
             </StackPanel>
 
             <TextBox x:Name="tbBemer"
+                     Text="{Binding Registration.Kommentar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Width="565"
                              Height="50"
                              Margin="10,0,0,10"
@@ -126,15 +122,7 @@
                        Margin="15,1,0,0"
                        Width="20"/>
             </StackPanel>
-            <StackPanel
-                    Orientation="Horizontal">
-                <Label x:Name="lbPickup"
-                           Content="Pickup:"
-                           Margin="10,1,0,0"/>
-                <Image Source="/Views/bevorstehende.png" 
-                       Margin="12,1,0,0"
-                       Width="20"/>
-            </StackPanel>
+
         </StackPanel>
 
         <StackPanel
@@ -142,16 +130,17 @@
                     Grid.Column="1" Grid.RowSpan="2">
 
             <TextBox x:Name="tbNamen"
+                     Text="{Binding Registration.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,14,10,0"/>
 
             <TextBox x:Name="tbMail"
+                     Text="{Binding Registration.EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
             <TextBox x:Name="tbPhone"
+                     Text="{Binding Registration.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
-            <DatePicker x:Name="dpErst"
-                                Margin="10,6,10,0"/>
 
         </StackPanel>
 
@@ -160,6 +149,7 @@
                     Grid.Column="3" Grid.RowSpan="2">
 
             <ComboBox x:Name="cbServ"
+                      Text="{Binding Registration.Service, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,12,10,0">
                 <ComboBoxItem IsSelected="True" Content="Kleiner-Service"/>
                 <ComboBoxItem Content="Grosser-Service"/>
@@ -170,21 +160,18 @@
             </ComboBox>
 
             <ComboBox x:Name="cbPrio"
+                      Text="{Binding Registration.Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,5,10,0">
-                <ComboBoxItem IsSelected="True" Content="Express"/>
+                <ComboBoxItem Content="Express"/>
                 <ComboBoxItem Content="Standard"/>
                 <ComboBoxItem Content="Tief"/>
             </ComboBox>
 
-            <ComboBox x:Name="cbStatus"
-                              Margin="10,5,10,0">
-                <ComboBoxItem IsSelected="True" Content="Offen"/>
-                <ComboBoxItem Content="In Arbeit"/>
-                <ComboBoxItem Content="Fertig"/>
-            </ComboBox>
-
-            <DatePicker x:Name="dpFinisch"
-                                Margin="10,6,10,0"/>
+            <TextBox x:Name="cbStatus"
+                     IsReadOnly="True"
+                       Margin="10,7,10,0"
+                       VerticalAlignment="Center"
+                      Text="{Binding Registration.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <Button Command="{Binding CmdExitNew}"
@@ -206,6 +193,7 @@
         </Button>
 
         <Button Command="{Binding CmdSendenNew}"
+                IsDefault="True"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Grid.Column="2"

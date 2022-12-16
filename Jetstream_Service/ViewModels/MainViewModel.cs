@@ -19,8 +19,8 @@ namespace JetStream_Service.ViewModels
         private bool _IsIndeterminate = new bool();
 
 
-        public string jwtKey { get; set; }
-        public string registrationURL { get; set; }
+        public string keyJwt { get; set; }
+        public string RegistrationURL { get; set; }
 
 
         //private RegistrationModel _selectRegistration = new RegistrationModel();
@@ -46,10 +46,10 @@ namespace JetStream_Service.ViewModels
             _cmdExit = new RelayCommand(param => Execute_Exit(), param => CanExecute_Exit());
 
 
-            jwtKey = Properties.Settings.Default.JWTToken;
+            keyJwt = Properties.Settings.Default.JWTToken;
             string baseURL = Properties.Settings.Default.APILink;
             string regi = Properties.Settings.Default.registrationLink;
-            registrationURL = baseURL + regi;
+            RegistrationURL = baseURL + regi;
         }
 
         public ObservableCollection<RegistrationModel> Registrations
@@ -76,24 +76,11 @@ namespace JetStream_Service.ViewModels
             }
         }
 
-        
-
-        public Content content
-        {
-            get { return _content; }
-            set
-            {
-                if (value != _content)
-                {
-                    SetProperty<Content>(ref _content, value);
-                }
-            }
-        }
-
         private void Execute_New()
         {
             New_User new_User = new New_User();
             new_User.Show();
+            Execute_Refresh();
         }
 
         private bool CanExecute_New()
@@ -104,43 +91,67 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Update()
         {
+            RegistrationModel regi = new RegistrationModel();
+            regi = SelectedRegistartion;
+            string id = SelectedRegistartion.Id.ToString();
 
-            Edit_User edit_User = new Edit_User();
-            edit_User.Show();
+            Edit_User edit_User = new Edit_User(regi);
+            edit_User.ShowDialog();
+
+            if (edit_User.DialogResult == true)
+            {
+                string json = JsonSerializer.Serialize<RegistrationModel>(regi);
+
+                var options = new RestClientOptions($"{RegistrationURL}/{id}")
+                {
+                    MaxTimeout = 10000,
+                    ThrowOnAnyError = true
+                };
+                var client = new RestClient(options);
+
+                var request = new RestRequest()
+                    .AddHeader("Authorization", $"Bearer " + keyJwt)
+                    .AddJsonBody(json);
+
+                var response = client.Put(request);
+                Content.Status = "Status Code: " + response.StatusCode;
+            }
+            else if (edit_User.DialogResult == false)
+            {
+                Content.Status = "Canceled changes";
+            }
         }
 
         private bool CanExecute_Update()
         {
-            return true;
+            if (SelectedRegistartion == null)
+                return false;
+            else
+                return SelectedRegistartion.Id != null;
         }
 
         private void Execute_Detail()
         {
             RegistrationModel regi = new RegistrationModel();
             regi = SelectedRegistartion;
-            DetailViewModel editViewModel = new DetailViewModel(regi);
-            Detail_User detail_User = new Detail_User();
+            Detail_User detail_User = new Detail_User(regi);
             detail_User.Show();
         }
 
         private bool CanExecute_Detail()
         {
-            return true;
+            if (SelectedRegistartion == null)
+                return false;
+            else
+                return SelectedRegistartion.Id != null;
         }
 
         private void Execute_Delete()
         {
-
-        }
-
-        private bool CanExecute_Delete()
-        {
-            return true;
-        }
-
-        public void Execute_Refresh()
-        {
-            var options = new RestClientOptions(registrationURL)
+            RegistrationModel regi = new RegistrationModel();
+            regi = SelectedRegistartion;
+            string id = SelectedRegistartion.Id.ToString();
+            var options = new RestClientOptions($"{RegistrationURL}/{id}")
             {
                 MaxTimeout = 10000,
                 ThrowOnAnyError = true
@@ -148,13 +159,40 @@ namespace JetStream_Service.ViewModels
             var client = new RestClient(options);
 
             var request = new RestRequest()
-                .AddHeader("Authorization", $"Bearer " + jwtKey);
+                .AddHeader("Authorization", $"Bearer " + keyJwt);
+
+            var response = client.Delete(request);
+
+            Content.Status = "Status Code: " + response.StatusCode;
+            Execute_Refresh();
+        }
+
+        private bool CanExecute_Delete()
+        {
+            if (SelectedRegistartion == null)
+                return false;
+            else
+                return SelectedRegistartion.Id != null;
+        }
+
+        public void Execute_Refresh()
+        {
+            var options = new RestClientOptions(RegistrationURL)
+            {
+                MaxTimeout = 10000,
+                ThrowOnAnyError = true
+            };
+            var client = new RestClient(options);
+
+            var request = new RestRequest()
+                .AddHeader("Authorization", $"Bearer " + keyJwt);
 
             var response = client.Get(request);
             var statusCode = "Status Code: " + response.StatusCode;
 
             Registrations = JsonSerializer.Deserialize<ObservableCollection<RegistrationModel>>(response.Content);
-            //content.status = statusCode;
+            Content.Status = statusCode;
+
         }
 
         public bool CanExecute_Refresh()
@@ -165,7 +203,8 @@ namespace JetStream_Service.ViewModels
         private void Execute_Login()
         {
             Login_User login_User = new Login_User();
-            login_User.Show();
+            login_User.ShowDialog();
+            Execute_Refresh();
         }
 
         private bool CanExecute_Login()
@@ -230,6 +269,17 @@ namespace JetStream_Service.ViewModels
         {
             get { return _cmdExit; }
             set { _cmdExit = value; }
+        }
+        public Content Content
+        {
+            get { return _content; }
+            set
+            {
+                if (value != _content)
+                {
+                    SetProperty<Content>(ref _content, value);
+                }
+            }
         }
 
     }

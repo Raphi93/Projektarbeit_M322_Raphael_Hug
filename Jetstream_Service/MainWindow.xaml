@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModels="clr-namespace:JetStream_Service.ViewModels" x:Class="JetStream_Service.MainWindow"
         mc:Ignorable="d"
-        
         Title="JetStream-Service"
         Icon="/logo.png"
         WindowStartupLocation="CenterScreen"
@@ -22,9 +21,6 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-    <Window.DataContext>
-        <ViewModels:MainViewModel/>
-    </Window.DataContext>
 
 
     <Grid>
@@ -34,14 +30,24 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+            <TextBlock Text="{Binding Content.Status}"
+                       VerticalAlignment="Center"
+                       Margin="15,0,0,0"/>
+        </StackPanel>
+
         <Button Command="{Binding CmdLogin}"
+                IsDefault="True"
             Grid.Row="0"
             VerticalAlignment="Center"
             HorizontalAlignment="Right"
             Margin="0,0,10,0"
             Width="90"
             ToolTip="Login"
-            Style="{DynamicResource RoundButton}">
+            Style="{DynamicResource RoundButton}" Cursor="Hand">
 
             <StackPanel Orientation="Horizontal">
                 <Image Source="/login.png" Width="20" />
@@ -58,7 +64,7 @@
             Margin="0,0,10,0"
             Width="90"
             ToolTip="Beenden"
-            Style="{DynamicResource RoundButton}">
+            Style="{DynamicResource RoundButton}" Cursor="Hand">
 
             <StackPanel Orientation="Horizontal">
                 <Image Source="/shutdown.png" Width="20" />
@@ -74,7 +80,7 @@
 
             <ToolBar>
                 <Button ToolTip="Neuer Mitarbeiter" Command="{Binding CmdNew}">
-                    <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" >
                         <Image Source="/add-user.png"
                                Margin="10,0,0,0" 
                                Width="30"/>
@@ -84,7 +90,7 @@
                     </StackPanel>
                 </Button>
                 <Button ToolTip="Ändern" Command="{Binding CmdUpdate}">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
                         <Image Source="/edit.png" 
                                Margin="10,0,0,0" 
                                Width="30"/>
@@ -94,7 +100,7 @@
                     </StackPanel>
                 </Button>
                 <Button ToolTip="Löschen" Command="{Binding CmdDelete}">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
                         <Image Source="/social-media.png" 
                                Margin="10,0,0,0" 
                                Width="30"/>
@@ -104,20 +110,20 @@
                     </StackPanel>
                 </Button>
                 <Button ToolTip="Detail" Command="{Binding CmdDetail}">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
                         <Image Source="/information.png"
                                Margin="10,0,0,0" 
-                               Width="30"/>
+                               Width="30" Cursor="Hand"/>
                         <TextBlock Margin="5,0,0,0" 
                                        Text="Detail"
                                        VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button ToolTip="Refresh" Command="{Binding CmdRefresh}">
-                    <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" >
                         <Image Source="/refresh-user-sign.png" 
                                Margin="10,0,0,0" 
-                               Width="30"/>
+                               Width="30" Cursor="Hand"/>
                         <TextBlock Margin="5,0,0,0" 
                                        Text="Refresh"
                                        VerticalAlignment="Center"/>

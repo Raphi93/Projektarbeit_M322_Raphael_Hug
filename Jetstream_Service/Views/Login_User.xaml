@@ -9,9 +9,10 @@
         x:Class="JetStream_Service.View.Login_User"
         ResizeMode="NoResize"
         Icon="/login.png"
+        xmlns:res="clr-namespace:JetStream_Service.Resources"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Login" Height="170" Width="315">
+        Title="{x:Static res:MyResources.WindowLogin}" Height="170" Width="315">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="RoundButton">
             <Style.Resources>
@@ -21,23 +22,31 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.5">
+            <GradientStop Color="#FFB9B9B9" Offset="0" />
+            <GradientStop Color="WhiteSmoke" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="lbUserName"
-                       Content="Username"
+                       Content="{x:Static res:MyResources.LoginName}"
                        Margin="10,10,0,0"/>
                 <TextBox x:Name="tbUsername"
-                         Margin="10,10,0,0"
+                         Cursor="IBeam"
+                         Margin="17,10,0,0"
                          Text="{Binding Authentifications.User, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center"
                          Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="lbPassw"
-                       Content="Password"
+                       Content="{x:Static res:MyResources.LoginPasswd}"
                        Margin="10,10,0,0"/>
                 <TextBox x:Name="tbPassw"
+                         Cursor="IBeam"
                          VerticalContentAlignment="Center"
                          Text="{Binding Authentifications.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="14,10,0,0"
@@ -47,6 +56,7 @@
                         Margin="0,20,15,0"
                         HorizontalAlignment="Right">
                 <Button Command="{Binding CmdSendenLogin}"
+                        Cursor="Hand"
                         IsDefault="True"
                     Width="90"
                     ToolTip="Login"
@@ -55,12 +65,13 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/login.png" Width="20" />
                         <TextBlock x:Name="tblLogin"
-                       Text="Login"
+                       Text="{x:Static res:MyResources.Senden}"
                        Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
                 <Button Command="{Binding CmdExitLogin}"
                     Width="90"
+                        Cursor="Hand"
                     Margin="10,0,0,0"
                     ToolTip="Login"
                     Style="{DynamicResource RoundButton}">
@@ -68,7 +79,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Views/schaltflache-abbrechen.png" Width="20" />
                         <TextBlock x:Name="tblAbbrechen"
-                       Text="Abbrechen"
+                       Text="{x:Static res:MyResources.Abbrechen}"
                        Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>

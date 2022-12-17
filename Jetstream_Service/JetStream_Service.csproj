@@ -28,6 +28,7 @@
     <None Remove="schaltflache-abbrechen.png" />
     <None Remove="shutdown.png" />
     <None Remove="social-media.png" />
+    <None Remove="suche.png" />
     <None Remove="Views\anruf.png" />
     <None Remove="Views\ausweis.png" />
     <None Remove="Views\bemerkungen.png" />
@@ -47,7 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="RestSharp" Version="108.0.3" />
   </ItemGroup>
 
@@ -62,6 +62,7 @@
     <Resource Include="refresh-user-sign.png" />
     <Resource Include="shutdown.png" />
     <Resource Include="social-media.png" />
+    <Resource Include="suche.png" />
     <Resource Include="Views\anruf.png" />
     <Resource Include="Views\ausweis.png" />
     <Resource Include="Views\bemerkungen.png" />
@@ -82,6 +83,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Resources\MyResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MyResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\Edit_User.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +97,30 @@
     <Compile Update="Views\New_User.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\MyResources.de-CH.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MyResources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MyResources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MyResources.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\MyResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyResources.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

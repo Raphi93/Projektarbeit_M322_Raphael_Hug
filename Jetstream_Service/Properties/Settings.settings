@@ -11,5 +11,14 @@
     <Setting Name="registrationLink" Type="System.String" Scope="User">
       <Value Profile="(Default)">/Registration</Value>
     </Setting>
+    <Setting Name="LanguageID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">de-CH</Value>
+    </Setting>
+    <Setting Name="WindowsHeight" Type="System.String" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="WindowsWidth" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

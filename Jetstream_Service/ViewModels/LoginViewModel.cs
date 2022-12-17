@@ -20,10 +20,8 @@ namespace JetStream_Service.ViewModels
 
         private Authentification _authentification = new Authentification();
 
-        private bool _IsIndeterminate = new bool();
 
         public string ApiLink { get; set; }
-
 
         public Authentification Authentifications
         {
@@ -33,18 +31,6 @@ namespace JetStream_Service.ViewModels
                 if (value != _authentification)
                 {
                     SetProperty<Authentification>(ref _authentification, value);
-                }
-            }
-        }
-
-        public bool IsIndeterminate
-        {
-            get { return _IsIndeterminate; }
-            set
-            {
-                if (value != _IsIndeterminate)
-                {
-                    SetProperty(ref _IsIndeterminate, value);
                 }
             }
         }
@@ -75,33 +61,40 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Senden()
         {
-            string json = JsonSerializer.Serialize<Authentification>(Authentifications);
-
-            var options = new RestClientOptions(ApiLink + "/UserToken/login")
+            try
             {
-                MaxTimeout = 10000,
-                ThrowOnAnyError = true
-            };
-            var client = new RestClient(options);
+                string json = JsonSerializer.Serialize<Authentification>(Authentifications);
 
-            var request = new RestRequest()
-                .AddJsonBody(json);
+                var options = new RestClientOptions(ApiLink + "/UserToken/login")
+                {
+                    MaxTimeout = 10000,
+                    ThrowOnAnyError = true
+                };
+                var client = new RestClient(options);
 
-            var response = client.Post(request);
+                var request = new RestRequest()
+                    .AddJsonBody(json);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                AuthentificationResponse authResponse = new AuthentificationResponse();
-                authResponse = JsonSerializer.Deserialize<AuthentificationResponse>(response.Content);
-                Properties.Settings.Default.JWTToken = authResponse.jwt;
-                Properties.Settings.Default.Save();
+                var response = client.Post(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    AuthentificationResponse authResponse = new AuthentificationResponse();
+                    authResponse = JsonSerializer.Deserialize<AuthentificationResponse>(response.Content);
+                    Properties.Settings.Default.JWTToken = authResponse.jwt;
+                    Properties.Settings.Default.Save();
+                    CloseAction();
+                }
+                else
+                {
+                    MessageBox.Show($"{response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 CloseAction();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show($"{response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            CloseAction();
         }
 
         private bool CanExecute_Senden()
@@ -114,8 +107,6 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Exit()
         {
-            Login_User loginView = new Login_User();
-            loginView.DialogResult = false;
             CloseAction();
         }
 

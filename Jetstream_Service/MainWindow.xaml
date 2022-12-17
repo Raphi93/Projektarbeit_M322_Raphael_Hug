@@ -3,15 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:JetStream_Service.Resources"
         xmlns:ViewModels="clr-namespace:JetStream_Service.ViewModels" x:Class="JetStream_Service.MainWindow"
         mc:Ignorable="d"
-        Title="JetStream-Service"
+        Title="{x:Static res:MyResources.WindowTitle}"
         Icon="/logo.png"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
+        MinHeight="300"
+        MinWidth="670"
         Height="600"
-        Width="1000"
-        Background="LightGray">
+        Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="RoundButton">
             <Style.Resources>
@@ -21,6 +23,12 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.5">
+            <GradientStop Color="#FFB9B9B9" Offset="0" />
+            <GradientStop Color="WhiteSmoke" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
 
 
     <Grid>
@@ -52,7 +60,8 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/login.png" Width="20" />
                 <TextBlock x:Name="tblLogin"
-                       Text="Login"
+                           VerticalAlignment="Center"
+                       Text="{x:Static res:MyResources.LoginUser}"
                        Margin="5,0,0,0"/>
             </StackPanel>
         </Button>
@@ -69,7 +78,8 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/shutdown.png" Width="20" />
                 <TextBlock x:Name="tblBeenden"
-                       Text="Beenden"
+                           VerticalAlignment="Center"
+                       Text="{x:Static res:MyResources.Closing}"
                        Margin="5,0,0,0"/>
             </StackPanel>
         </Button>
@@ -78,14 +88,14 @@
         <ToolBarPanel Grid.Row="1" 
                       Margin="10,0,10,0">
 
-            <ToolBar>
+            <ToolBar HorizontalAlignment="Stretch">
                 <Button ToolTip="Neuer Mitarbeiter" Command="{Binding CmdNew}">
                     <StackPanel Orientation="Horizontal" Cursor="Hand" >
                         <Image Source="/add-user.png"
                                Margin="10,0,0,0" 
                                Width="30"/>
                         <TextBlock Margin="5,0,0,0" 
-                                       Text="New"
+                                       Text="{x:Static res:MyResources.NewUser}"
                                        VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -95,7 +105,7 @@
                                Margin="10,0,0,0" 
                                Width="30"/>
                         <TextBlock Margin="5,0,0,0" 
-                                       Text="Edit"
+                                       Text="{x:Static res:MyResources.EditUser}"
                                        VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -105,7 +115,7 @@
                                Margin="10,0,0,0" 
                                Width="30"/>
                         <TextBlock Margin="5,0,0,0" 
-                                       Text="Delete"
+                                       Text="{x:Static res:MyResources.DeleteUser}"
                                        VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -115,7 +125,7 @@
                                Margin="10,0,0,0" 
                                Width="30" Cursor="Hand"/>
                         <TextBlock Margin="5,0,0,0" 
-                                       Text="Detail"
+                                       Text="{x:Static res:MyResources.DetailUser}"
                                        VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -125,10 +135,30 @@
                                Margin="10,0,0,0" 
                                Width="30" Cursor="Hand"/>
                         <TextBlock Margin="5,0,0,0" 
-                                       Text="Refresh"
+                                       Text="{x:Static res:MyResources.RefreshUser}"
                                        VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
+                
+                <Button ToolTip="Search"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CmdSearch}"
+                        Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/suche.png" 
+                               Margin="10,0,0,0" 
+                               Width="30" Cursor="Hand"/>
+                        <Label Content="{x:Static res:MyResources.SearchUser}"
+                               VerticalContentAlignment="Center"
+                               Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <TextBox 
+                       Cursor="IBeam"
+                       Text="{Binding SearchContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       Width="100"/>
             </ToolBar>
 
             <DataGrid
@@ -142,42 +172,42 @@
 
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID"
+                    <DataGridTextColumn Header="{x:Static res:MyResources.UserId}"
                                         Binding="{Binding Id}"/>
                     <DataGridTextColumn
-                        Header="Name"
+                        Header="{x:Static res:MyResources.UserName}"
                         Binding="{Binding Name}" />
 
                     <DataGridTextColumn
-                        Header="Email"
+                       Header="{x:Static res:MyResources.UserEmail}"
                         Binding="{Binding EMail}" />
 
                     <DataGridTextColumn
-                        Header="Phone"
+                        Header="{x:Static res:MyResources.UserPhone}"
                         Binding="{Binding Phone}" />
 
                     <DataGridTextColumn
-                        Header="Service"
+                        Header="{x:Static res:MyResources.UserService}"
                         Binding="{Binding Service}" />
 
                     <DataGridTextColumn
-                        Header="Priority"
+                        Header="{x:Static res:MyResources.UserPrio}"
                         Binding="{Binding Priority}" />
 
                     <DataGridTextColumn
-                        Header="Status"
+                        Header="{x:Static res:MyResources.UserStatus}"
                         Binding="{Binding Status}" />
 
                     <DataGridTextColumn
-                        Header="Create Date"
+                        Header="{x:Static res:MyResources.UserErstellt}"
                         Binding="{Binding CreateDate}" />
 
                     <DataGridTextColumn
-                        Header="Pickup Date"
+                        Header="{x:Static res:MyResources.UserPick}"
                         Binding="{Binding PickupDate}" />
 
                     <DataGridTextColumn
-                        Header="Bemerkung"
+                        Header="{x:Static res:MyResources.UserBemerkung}"
                         Binding="{Binding Kommentar}" />
                 </DataGrid.Columns>
             </DataGrid>

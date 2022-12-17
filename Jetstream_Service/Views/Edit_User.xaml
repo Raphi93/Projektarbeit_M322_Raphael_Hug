@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:JetStream_Service"
         xmlns:ViewModels="clr-namespace:JetStream_Service.ViewModels" x:Class="JetStream_Service.View.Edit_User"
         mc:Ignorable="d"
+        xmlns:res="clr-namespace:JetStream_Service.Resources"
         Icon="/edit.png"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Edit User" Height="300" Width="700"
-        Background="LightGray">
+        Title="{x:Static res:MyResources.WindowEdit}" Height="300" Width="700">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="RoundButton">
             <Style.Resources>
@@ -20,6 +20,12 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.5">
+            <GradientStop Color="#FFB9B9B9" Offset="0" />
+            <GradientStop Color="WhiteSmoke" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,7 +47,7 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbId"
-                           Content="ID:"
+                           Content="{x:Static res:MyResources.UserId}"
                            Margin="10,10,0,0"/>
                 <Image Source="/Views/gesichts-id.png" 
                        Margin="28,10,0,0"
@@ -51,35 +57,35 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbNamen"
-                           Content="Namen:"
+                           Content="{x:Static res:MyResources.UserName}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/ausweis.png" 
-                       Margin="0,1,0,0"
+                       Margin="8,1,0,0"
                        Width="20"/>
             </StackPanel>
 
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbMail"
-                           Content="Mail:"
+                           Content="{x:Static res:MyResources.UserEmail}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/email.png" 
-                       Margin="16,1,0,0"
+                       Margin="6,1,0,0"
                        Width="20"/>
             </StackPanel>
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbPhone"
-                           Content="Phone:"
+                           Content="{x:Static res:MyResources.UserPhone}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/anruf.png" 
-                       Margin="5,1,0,0"
+                       Margin="0,1,0,0"
                        Width="20"/>
             </StackPanel>
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbErstellt"
-                           Content="Erstellt:"
+                           Content="{x:Static res:MyResources.UserErstellt}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/datum.png" 
                        Margin="3,1,0,0"
@@ -88,7 +94,7 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbBemerkung"
-                           Content="Bemerkungen:"
+                           Content="{x:Static res:MyResources.UserBemerkung}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/bemerkungen.png" 
                        Margin="3,1,0,0"
@@ -96,6 +102,7 @@
             </StackPanel>
 
             <TextBox x:Name="tbBemer"
+                     Cursor="IBeam"
                      Text="{Binding Path=Kommentar , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Width="665"
                              Height="50"
@@ -112,7 +119,7 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbService"
-                           Content="Service:"
+                           Content="{x:Static res:MyResources.UserService}"
                            Margin="10,35,0,0"/>
                 <Image Source="/Views/management-service.png" 
                        Margin="10,35,0,0"
@@ -121,7 +128,7 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbPrio"
-                           Content="Priorität:"
+                           Content="{x:Static res:MyResources.UserPrio}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/prioritat.png" 
                        Margin="5,1,0,0"
@@ -130,7 +137,7 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbStatus"
-                           Content="Status:"
+                           Content="{x:Static res:MyResources.UserStatus}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/process.png" 
                        Margin="15,1,0,0"
@@ -139,10 +146,10 @@
             <StackPanel
                     Orientation="Horizontal">
                 <Label x:Name="lbPickup"
-                           Content="Pickup:"
+                           Content="{x:Static res:MyResources.UserPick}"
                            Margin="10,1,0,0"/>
                 <Image Source="/Views/bevorstehende.png" 
-                       Margin="12,1,0,0"
+                       Margin="15,1,0,0"
                        Width="20"/>
             </StackPanel>
         </StackPanel>
@@ -157,18 +164,22 @@
                         IsReadOnly="True"/>
 
             <TextBox x:Name="tbNamen"
+                     Cursor="IBeam"
                      Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
             <TextBox x:Name="tbMail"
+                     Cursor="IBeam"
                      Text="{Binding Path=EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
             <TextBox x:Name="tbPhone"
+                     Cursor="IBeam"
                      Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Margin="10,9,10,0"/>
 
             <TextBox x:Name="dpErst"
+                     Cursor="IBeam"
                      IsReadOnly="True"
                         Text="{Binding Path=CreateDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="10,9,10,0"/>
@@ -180,6 +191,7 @@
                     Grid.Column="3" Grid.RowSpan="2">
 
             <ComboBox x:Name="cbServ"
+                      Cursor="Hand"
                       Text="{Binding Path=Service, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,38,10,0">
                 <ComboBoxItem Content="Kleiner-Service"/>
@@ -191,6 +203,7 @@
             </ComboBox>
 
             <ComboBox x:Name="cbPrio"
+                      Cursor="Hand"
                       Text="{Binding Path=Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,5,10,0">
                 <ComboBoxItem Content="Express"/>
@@ -199,6 +212,7 @@
             </ComboBox>
 
             <ComboBox x:Name="cbStatus"
+                      Cursor="Hand"
                       Text="{Binding Path=Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,5,10,0">
                 <ComboBoxItem Content="Offen"/>
@@ -206,12 +220,14 @@
                 <ComboBoxItem Content="Fertig"/>
             </ComboBox>
 
-            <DatePicker x:Name="dpFinisch"
+            <TextBox x:Name="dpFinisch"
+                     Cursor="IBeam"
                         Text="{Binding Path=PickupDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Margin="10,5,10,0"/>
+                                Margin="10,7,10,0"/>
         </StackPanel>
 
         <Button Click="btClose"
+                Cursor="Hand"
             Grid.Row="1"
             Grid.Column="3"
             VerticalAlignment="Center"
@@ -224,12 +240,13 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/schaltflache-abbrechen.png" Width="20" />
                 <TextBlock x:Name="tblabrechen"
-                       Text="Abbrechen"
+                       Text="{x:Static res:MyResources.Abbrechen}"
                        Margin="5,0,0,0"/>
             </StackPanel>
         </Button>
 
         <Button Click="btSenden"
+                Cursor="Hand"
                 IsDefault="True"
             Grid.Row="1"
             Grid.ColumnSpan="2"
@@ -244,7 +261,7 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Views/mail-senden.png" Width="20" />
                 <TextBlock x:Name="tblBeenden"
-                       Text="Senden"
+                       Text="{x:Static res:MyResources.Senden}"
                        Margin="5,0,0,0"/>
             </StackPanel>
         </Button>

@@ -5,6 +5,7 @@ using RestSharp;
 using System;
 using System.Collections.ObjectModel;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace JetStream_Service.ViewModels
@@ -80,23 +81,30 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Senden()
         {
-            if (Registration.Kommentar == null)
-                Registration.Kommentar = "";
-
-            string json = JsonSerializer.Serialize<RegistrationModel>(Registration);
-
-            var options = new RestClientOptions(RegistrationURL)
+            try
             {
-                MaxTimeout = 10000,
-                ThrowOnAnyError = true
-            };
-            var client = new RestClient(options);
+                if (Registration.Kommentar == null)
+                    Registration.Kommentar = "";
 
-            var request = new RestRequest()
-                .AddJsonBody(json);
+                string json = JsonSerializer.Serialize<RegistrationModel>(Registration);
 
-            var response = client.Post(request);
-            CloseAction();
+                var options = new RestClientOptions(RegistrationURL)
+                {
+                    MaxTimeout = 10000,
+                    ThrowOnAnyError = true
+                };
+                var client = new RestClient(options);
+
+                var request = new RestRequest()
+                    .AddJsonBody(json);
+
+                var response = client.Post(request);
+                CloseAction();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private bool CanExecute_Senden()

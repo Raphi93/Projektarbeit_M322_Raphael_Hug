@@ -4,7 +4,9 @@ using JetStream_Service.View;
 using JetStream_Service.Views;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,14 +18,11 @@ namespace JetStream_Service.ViewModels
         private ObservableCollection<RegistrationModel> _registration = new ObservableCollection<RegistrationModel>();
         private RegistrationModel _selectedRegistartion = new RegistrationModel();
         private Content _content = new Content();
+        private string _SearchContent;
         private bool _IsIndeterminate = new bool();
-
 
         public string keyJwt { get; set; }
         public string RegistrationURL { get; set; }
-
-
-        //private RegistrationModel _selectRegistration = new RegistrationModel();
 
         public Action CloseAction { get; set; }
         private RelayCommand _cmdNew;
@@ -33,6 +32,7 @@ namespace JetStream_Service.ViewModels
         private RelayCommand _cmdDelete;
         private RelayCommand _cmdRefresh;
         private RelayCommand _cmdExit;
+        private RelayCommand _cmdSearch;
 
 
         public MainViewModel()
@@ -44,12 +44,13 @@ namespace JetStream_Service.ViewModels
             _cmdRefresh = new RelayCommand(param => Execute_Refresh(), param => CanExecute_Refresh());
             _cmdLogin = new RelayCommand(param => Execute_Login(), param => CanExecute_Login());
             _cmdExit = new RelayCommand(param => Execute_Exit(), param => CanExecute_Exit());
-
+            _cmdSearch = new RelayCommand(param => Execute_Search(), param => CanExecute_Search());
 
             keyJwt = Properties.Settings.Default.JWTToken;
             string baseURL = Properties.Settings.Default.APILink;
             string regi = Properties.Settings.Default.registrationLink;
             RegistrationURL = baseURL + regi;
+            Content.IsIndeterminate = false;
         }
 
         public ObservableCollection<RegistrationModel> Registrations
@@ -60,6 +61,18 @@ namespace JetStream_Service.ViewModels
                 if (value != _registration)
                 {
                     SetProperty<ObservableCollection<RegistrationModel>>(ref _registration, value);
+                }
+            }
+        }
+
+        public string SearchContent
+        {
+            get { return _SearchContent; }
+            set
+            {
+                if (value != _SearchContent)
+                {
+                    SetProperty(ref _SearchContent, value);
                 }
             }
         }
@@ -88,37 +101,84 @@ namespace JetStream_Service.ViewModels
             return true;
 
         }
+        private void Execute_Search()
+        {
+            Content.IsIndeterminate = true;
+            try
+            {
+                Execute_Refresh();
+                IEnumerable<RegistrationModel> filteredOrder;
+                filteredOrder = Registrations.Where
+                    (x => x.Name.Contains(SearchContent, StringComparison.OrdinalIgnoreCase) ||
+                    x.Id.ToString().Contains(SearchContent, StringComparison.OrdinalIgnoreCase) ||
+                    x.Phone.Contains(SearchContent, StringComparison.OrdinalIgnoreCase) ||
+                    x.EMail.Contains(SearchContent, StringComparison.OrdinalIgnoreCase) ||
+                    x.Priority.Contains(SearchContent, StringComparison.OrdinalIgnoreCase) ||
+                    x.Service.Contains(SearchContent, StringComparison.OrdinalIgnoreCase) ||
+                    x.Status.Contains(SearchContent, StringComparison.OrdinalIgnoreCase));
+                var filteredOrderCollection = new ObservableCollection<RegistrationModel>(filteredOrder);
+                Registrations = filteredOrderCollection;
+            }
+            catch (Exception ex)
+            {
+                Content.Status = "Error: " + ex.Message;
+            }
+            finally
+            {
+                SearchContent = "";
+            }
+        }
+
+        private bool CanExecute_Search()
+        {
+            if (Registrations.Count == 0)
+                return false;
+            else
+                return SearchContent != null && SearchContent != "";
+        }
 
         private void Execute_Update()
         {
-            RegistrationModel regi = new RegistrationModel();
-            regi = SelectedRegistartion;
-            string id = SelectedRegistartion.Id.ToString();
-
-            Edit_User edit_User = new Edit_User(regi);
-            edit_User.ShowDialog();
-
-            if (edit_User.DialogResult == true)
+            Content.IsIndeterminate = true;
+            try
             {
-                string json = JsonSerializer.Serialize<RegistrationModel>(regi);
+                RegistrationModel regi = new RegistrationModel();
+                regi = SelectedRegistartion;
+                string id = SelectedRegistartion.Id.ToString();
 
-                var options = new RestClientOptions($"{RegistrationURL}/{id}")
+                Edit_User edit_User = new Edit_User(regi);
+                edit_User.ShowDialog();
+
+                if (edit_User.DialogResult == true)
                 {
-                    MaxTimeout = 10000,
-                    ThrowOnAnyError = true
-                };
-                var client = new RestClient(options);
+                    string json = JsonSerializer.Serialize<RegistrationModel>(regi);
 
-                var request = new RestRequest()
-                    .AddHeader("Authorization", $"Bearer " + keyJwt)
-                    .AddJsonBody(json);
+                    var options = new RestClientOptions($"{RegistrationURL}/{id}")
+                    {
+                        MaxTimeout = 10000,
+                        ThrowOnAnyError = true
+                    };
+                    var client = new RestClient(options);
 
-                var response = client.Put(request);
-                Content.Status = "Status Code: " + response.StatusCode;
+                    var request = new RestRequest()
+                        .AddHeader("Authorization", $"Bearer " + keyJwt)
+                        .AddJsonBody(json);
+
+                    var response = client.Put(request);
+                    Content.Status = "Status Code: " + response.StatusCode;
+                }
+                else if (edit_User.DialogResult == false)
+                {
+                    Content.Status = "Canceled changes";
+                }
             }
-            else if (edit_User.DialogResult == false)
+            catch (Exception ex)
             {
-                Content.Status = "Canceled changes";
+                Content.Status = "Error: " + ex.Message;
+            }
+            finally
+            {
+                Content.IsIndeterminate = false;
             }
         }
 
@@ -148,23 +208,35 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Delete()
         {
-            RegistrationModel regi = new RegistrationModel();
-            regi = SelectedRegistartion;
-            string id = SelectedRegistartion.Id.ToString();
-            var options = new RestClientOptions($"{RegistrationURL}/{id}")
+            Content.IsIndeterminate = true;
+            try
             {
-                MaxTimeout = 10000,
-                ThrowOnAnyError = true
-            };
-            var client = new RestClient(options);
+                RegistrationModel regi = new RegistrationModel();
+                regi = SelectedRegistartion;
+                string id = SelectedRegistartion.Id.ToString();
+                var options = new RestClientOptions($"{RegistrationURL}/{id}")
+                {
+                    MaxTimeout = 10000,
+                    ThrowOnAnyError = true
+                };
+                var client = new RestClient(options);
 
-            var request = new RestRequest()
-                .AddHeader("Authorization", $"Bearer " + keyJwt);
+                var request = new RestRequest()
+                    .AddHeader("Authorization", $"Bearer " + keyJwt);
 
-            var response = client.Delete(request);
+                var response = client.Delete(request);
 
-            Content.Status = "Status Code: " + response.StatusCode;
-            Execute_Refresh();
+                Content.Status = "Status Code: " + response.StatusCode;
+                Execute_Refresh();
+            }
+            catch (Exception ex)
+            {
+                Content.Status = "Error: " + ex.Message;
+            }
+            finally
+            {
+                Content.IsIndeterminate = false;
+            }
         }
 
         private bool CanExecute_Delete()
@@ -177,22 +249,33 @@ namespace JetStream_Service.ViewModels
 
         public void Execute_Refresh()
         {
-            var options = new RestClientOptions(RegistrationURL)
+            Content.IsIndeterminate = true;
+            try
             {
-                MaxTimeout = 10000,
-                ThrowOnAnyError = true
-            };
-            var client = new RestClient(options);
+                var options = new RestClientOptions(RegistrationURL)
+                {
+                    MaxTimeout = 10000,
+                    ThrowOnAnyError = true
+                };
+                var client = new RestClient(options);
 
-            var request = new RestRequest()
-                .AddHeader("Authorization", $"Bearer " + keyJwt);
+                var request = new RestRequest()
+                    .AddHeader("Authorization", $"Bearer " + keyJwt);
 
-            var response = client.Get(request);
-            var statusCode = "Status Code: " + response.StatusCode;
+                var response = client.Get(request);
+                var statusCode = "Status Code: " + response.StatusCode;
 
-            Registrations = JsonSerializer.Deserialize<ObservableCollection<RegistrationModel>>(response.Content);
-            Content.Status = statusCode;
-
+                Registrations = JsonSerializer.Deserialize<ObservableCollection<RegistrationModel>>(response.Content);
+                Content.Status = statusCode;
+            }
+            catch (Exception ex)
+            {
+                Content.Status = "Error: " + ex.Message;
+            }
+            finally
+            {
+                Content.IsIndeterminate = false;
+            }
         }
 
         public bool CanExecute_Refresh()
@@ -214,7 +297,6 @@ namespace JetStream_Service.ViewModels
 
         private void Execute_Exit()
         {
-
             MessageBoxResult result = MessageBox.Show($" Wollen Sie wirklich beenden?",
                "Begrüssung",
                MessageBoxButton.YesNo,
@@ -233,6 +315,12 @@ namespace JetStream_Service.ViewModels
         {
             get { return _cmdNew; }
             set { _cmdNew = value; }
+        }
+
+        public RelayCommand CmdSearch
+        {
+            get { return _cmdSearch; }
+            set { _cmdSearch = value; }
         }
 
         public RelayCommand CmdLogin

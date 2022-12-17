@@ -60,5 +60,41 @@ namespace JetStream_Service.Properties {
                 this["registrationLink"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("de-CH")]
+        public string LanguageID {
+            get {
+                return ((string)(this["LanguageID"]));
+            }
+            set {
+                this["LanguageID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public string WindowsHeight {
+            get {
+                return ((string)(this["WindowsHeight"]));
+            }
+            set {
+                this["WindowsHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public string WindowsWidth {
+            get {
+                return ((string)(this["WindowsWidth"]));
+            }
+            set {
+                this["WindowsWidth"] = value;
+            }
+        }
     }
 }

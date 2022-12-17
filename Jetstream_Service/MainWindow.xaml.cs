@@ -17,6 +17,5 @@ namespace JetStream_Service
             if (ovm.CloseAction == null)
                 ovm.CloseAction = new Action(() => this.Close());
         }
-
     }
 }

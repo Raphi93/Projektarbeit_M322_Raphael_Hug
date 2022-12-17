@@ -16,5 +16,18 @@ namespace JetStream_Service.Models
                 }
             }
         }
+        private bool _IsIndeterminate = new bool();
+
+        public bool IsIndeterminate
+        {
+            get { return _IsIndeterminate; }
+            set
+            {
+                if (value != _IsIndeterminate)
+                {
+                    SetProperty(ref _IsIndeterminate, value);
+                }
+            }
+        }
     }
 }

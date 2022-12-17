@@ -139,7 +139,7 @@
     <value>Utente:</value>
   </data>
   <data name="LoginPasswd" xml:space="preserve">
-    <value>Parola d’ordine:</value>
+    <value>ordine: </value>
   </data>
   <data name="LoginUser" xml:space="preserve">
     <value>Annunciare</value>

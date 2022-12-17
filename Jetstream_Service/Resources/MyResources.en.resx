@@ -136,7 +136,7 @@
     <value>Edit</value>
   </data>
   <data name="LoginName" xml:space="preserve">
-    <value>User:</value>
+    <value>User:       </value>
   </data>
   <data name="LoginPasswd" xml:space="preserve">
     <value>Password:</value>

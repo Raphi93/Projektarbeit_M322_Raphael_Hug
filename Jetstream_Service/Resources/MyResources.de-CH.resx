@@ -118,83 +118,82 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Abbrechen" xml:space="preserve">
-    <value>Avorter</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Closing" xml:space="preserve">
-    <value>Finir</value>
+    <value>Beenden</value>
   </data>
   <data name="DeleteUser" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Löschen</value>
   </data>
   <data name="DetailUser" xml:space="preserve">
-    <value>Détail</value>
+    <value>Detail</value>
   </data>
   <data name="DetailWindow" xml:space="preserve">
-    <value>Détail client</value>
+    <value>Detail Kunde</value>
   </data>
   <data name="EditUser" xml:space="preserve">
-    <value>Éditer</value>
+    <value>Editiren</value>
   </data>
   <data name="LoginName" xml:space="preserve">
-    <value>Utilisateur:</value>
+    <value>Benutzer:</value>
   </data>
   <data name="LoginPasswd" xml:space="preserve">
-    <value>Mot de passe:</value>
+    <value>Password:</value>
   </data>
   <data name="LoginUser" xml:space="preserve">
-    <value>Annoncer</value>
+    <value>Anmelden</value>
   </data>
   <data name="NewUser" xml:space="preserve">
-    <value>Nouveau</value>
+    <value>Neu</value>
   </data>
   <data name="RefreshUser" xml:space="preserve">
-    <value>Mettre à jour</value>
+    <value>Aktualisierung</value>
   </data>
   <data name="SearchUser" xml:space="preserve">
-    <value>Rechercher</value>
+    <value>Suchen</value>
   </data>
   <data name="Senden" xml:space="preserve">
-    <value>Envoyer</value>
+    <value>Senden</value>
   </data>
   <data name="UserBemerkung" xml:space="preserve">
-    <value>Remarque:</value>
+    <value>Bemerkung:</value>
   </data>
   <data name="UserEmail" xml:space="preserve">
-    <value>Messagerie électronique:</value>
+    <value>E-Mail:</value>
   </data>
   <data name="UserErstellt" xml:space="preserve">
-    <value>Créé:</value>
+    <value>Erstellt:</value>
   </data>
   <data name="UserId" xml:space="preserve">
     <value>ID:</value>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>ID:
-Nom:</value>
+    <value>Name:</value>
   </data>
   <data name="UserPhone" xml:space="preserve">
-    <value>Téléphone:</value>
+    <value>Telefon:</value>
   </data>
   <data name="UserPick" xml:space="preserve">
-    <value>Prêt:</value>
+    <value>Bereit:</value>
   </data>
   <data name="UserPrio" xml:space="preserve">
-    <value>Priorité:</value>
+    <value>Priorität:</value>
   </data>
   <data name="UserService" xml:space="preserve">
     <value>Service:</value>
   </data>
   <data name="UserStatus" xml:space="preserve">
-    <value>Statut:</value>
+    <value>Status:</value>
   </data>
   <data name="WindowEdit" xml:space="preserve">
-    <value>Changement d’utilisateurs</value>
+    <value>Benutzer Ändern</value>
   </data>
   <data name="WindowLogin" xml:space="preserve">
-    <value>Inscription</value>
+    <value>Anmeldung</value>
   </data>
   <data name="WindowNew" xml:space="preserve">
-    <value>Nouvel utilisateur</value>
+    <value>Neuer Benutzer</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Jetstream-Service</value>

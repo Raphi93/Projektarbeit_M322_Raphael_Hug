@@ -61,7 +61,7 @@ namespace JetStream_Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Abrechen.
+        ///   Looks up a localized string similar to Abbrechen.
         /// </summary>
         public static string Abbrechen {
             get {
@@ -178,7 +178,7 @@ namespace JetStream_Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bemmerkung:.
+        ///   Looks up a localized string similar to Bemerkung:.
         /// </summary>
         public static string UserBemerkung {
             get {

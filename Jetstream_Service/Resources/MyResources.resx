@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Abbrechen" xml:space="preserve">
-    <value>Abrechen</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Closing" xml:space="preserve">
     <value>Beenden</value>
@@ -157,7 +157,7 @@
     <value>Senden</value>
   </data>
   <data name="UserBemerkung" xml:space="preserve">
-    <value>Bemmerkung:</value>
+    <value>Bemerkung:</value>
   </data>
   <data name="UserEmail" xml:space="preserve">
     <value>E-Mail:</value>

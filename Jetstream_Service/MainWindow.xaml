@@ -23,13 +23,15 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
     <Window.Background>
         <LinearGradientBrush EndPoint="1,0" StartPoint="0,0.5">
             <GradientStop Color="#FFB9B9B9" Offset="0" />
             <GradientStop Color="WhiteSmoke" Offset="1" />
         </LinearGradientBrush>
     </Window.Background>
-
 
     <Grid>
         <Grid.RowDefinitions>

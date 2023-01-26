@@ -6,10 +6,10 @@
       <Value Profile="(Default)">eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJSYXBoaSIsIm5iZiI6MTY3MTExNTEwOSwiZXhwIjoxNjcxMTE2MDA5LCJpYXQiOjE2NzExMTUxMDl9.PVl460QBjqW35WIpgrFhgMeQAKn-DYo8lj1psLdj49kWauvEWvJRVwxD-jJlxqJFDB7ULA6Y7S0sGP0XjokYKQ</Value>
     </Setting>
     <Setting Name="APILink" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://localhost:7293</Value>
+      <Value Profile="(Default)">https://localhost:7060</Value>
     </Setting>
     <Setting Name="registrationLink" Type="System.String" Scope="User">
-      <Value Profile="(Default)">/Registration</Value>
+      <Value Profile="(Default)">/api/Registration</Value>
     </Setting>
     <Setting Name="LanguageID" Type="System.String" Scope="User">
       <Value Profile="(Default)">de-CH</Value>

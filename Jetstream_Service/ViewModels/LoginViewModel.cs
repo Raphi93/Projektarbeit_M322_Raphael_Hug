@@ -65,7 +65,7 @@ namespace JetStream_Service.ViewModels
             {
                 string json = JsonSerializer.Serialize<Authentification>(Authentifications);
 
-                var options = new RestClientOptions(ApiLink + "/UserToken/login")
+                var options = new RestClientOptions(ApiLink + "/api/UserToken/login")
                 {
                     MaxTimeout = 10000,
                     ThrowOnAnyError = true

@@ -6,11 +6,11 @@ namespace JetStream_Service.Models
 {
     public class RegistrationModel : ViewModelBase
     {
-        private int _Id;
-        [JsonPropertyName("id")]
-        public int Id
+        private string? _Id;
+        [JsonPropertyName("_id")]
+        public string? Id
         {
-            get { return (int)_Id; }
+            get { return (string)_Id; }
             set
             {
                 if (_Id != value)

@@ -39,7 +39,7 @@ namespace JetStream_Service.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7293")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7060")]
         public string APILink {
             get {
                 return ((string)(this["APILink"]));
@@ -51,7 +51,7 @@ namespace JetStream_Service.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/Registration")]
+        [global::System.Configuration.DefaultSettingValueAttribute("/api/Registration")]
         public string registrationLink {
             get {
                 return ((string)(this["registrationLink"]));
